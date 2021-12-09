@@ -6,6 +6,7 @@
 # ----------------------------------------------------------------------------------------------------------------------
 import time
 import os
+import numpy as np
 import torch
 import torch.nn as nn
 from dataset import get_batch
@@ -79,7 +80,7 @@ def finetune_step(args, fold, epoch, model, optimizer, scheduler, train_dataload
 
             if iteration % args.log_interval == 0 or iteration == total_iteration:
                 time_elapsed = time.time() - start
-                print(f"[iter] {iteration}/{total_iteration} | [consumption] {n_consumption} | [lr] {round(optimizer.param_groups[0]['lr'], 8)} | [loss] {round(running_loss[-1], 8)} | [elapsed] {int(time_elapsed // 3600)}h, {int((time_elapsed % 3600) // 60)}m, {int((time_elapsed % 3600) % 60)}s")
+                print(f"[iter] {iteration}/{total_iteration} | [consumption] {n_consumption} | [lr] {round(optimizer.param_groups[0]['lr'], 8)} | [loss] {round(np.mean(running_loss[-args.log_interval:]), 8)} | [elapsed] {int(time_elapsed // 3600)}h, {int((time_elapsed % 3600) // 60)}m, {int((time_elapsed % 3600) % 60)}s")
 
             if iteration % args.save_interval == 0 or iteration == total_iteration:
                 PATH = os.path.join(args.checkpoint_path, "fold-" + str(fold))
