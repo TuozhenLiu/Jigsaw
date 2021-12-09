@@ -1,10 +1,29 @@
 # Jigsaw
 
-## V1 | Ensemble [TFIDF+BERT]
+## RoBERTa fine-tuning V0
 
-Baseline copied from [[Best Score 0.856] Jigsaw for beginners](https://www.kaggle.com/andrej0marinchenko/best-score-0-856-jigsaw-for-beginners/notebook),  [Jigsaw Ensemble [TFIDF+BERT]](https://www.kaggle.com/leolu1998/jigsaw-ensemble-tfidf-bert)
+- Modified Training Pairs
+  - 1:10 (1:5 hard neg samples)
+- 10 folds
+- 3 epochs -> best
+- 64 batch_size
+- Adafactor
+  - eps=(1e-30, 1e-3)
+  - clip_threshold=1.0
+  - decay_rate=-0.8
+  - weight_decay=1e-6
+  - relative_step=False        
+  - scale_parameter=True
+  - warmup_init=False 
+- lr 3e-4 -> 1e-5 
+  - T_max 3000 
+  - CosineAnnealingLR
 
-Pay attention to the input libraries (databases):
+-   eval & save interval 1000 
+
+## Ensemble [TFIDF+RoBERTa]
+
+Input files:
 
 - ../input/jigsaw-toxic-severity-rating - current competition data
 - ../input/jigsaw-toxic-comment-classification-challenge - 2017 competition data "The problem of classification of toxic comments"
@@ -44,11 +63,9 @@ Pay attention to the input libraries (databases):
 
 `notes:` about 30min for 1fold inference
 
+### References
 
-
-- pretained https://huggingface.co/SkolkovoInstitute/roberta_toxicity_classifier
-
-
+ [[Best Score 0.856] Jigsaw for beginners](https://www.kaggle.com/andrej0marinchenko/best-score-0-856-jigsaw-for-beginners/notebook),  [Jigsaw Ensemble [TFIDF+BERT]](https://www.kaggle.com/leolu1998/jigsaw-ensemble-tfidf-bert)
 
 ## Some ideas:
 
@@ -62,3 +79,4 @@ Pay attention to the input libraries (databases):
   - https://www.kaggle.com/c/jigsaw-toxic-severity-rating/discussion/293328
 - Huggingface pretained model
   - https://huggingface.co/SkolkovoInstitute/roberta_toxicity_classifier
+
