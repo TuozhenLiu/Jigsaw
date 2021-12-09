@@ -1,4 +1,4 @@
-! python ../input/jigsawscript/main.py \
+python ../input/jigsawscript/main.py \
   --train_path ../input/jigsaw-toxic-comment-classification-challenge \
   --valid_path ../input/jigsaw-toxic-severity-rating/validation_data.csv \
   --modified_train_path ../input/jigsawmodify-train-data/modified_train.csv \
