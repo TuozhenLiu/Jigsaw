@@ -4,12 +4,40 @@
 # Date: 2021/12/9
 # Description:
 # ----------------------------------------------------------------------------------------------------------------------
-import pandas as pd
-import numpy as np
+import torch
+from torch.utils.data import Dataset, DataLoader
 
 
-train_df = pd.read_csv("input/validation_data.csv")
-k_fold_indexes = np.array_split(np.random.permutation(np.arange(train_df.shape[0])), 10)
-fold = 0
-train = train_df[~train_df.index.isin(k_fold_indexes[fold])].reset_index(drop=True)
-print(train.shape)
+class test_dataset(Dataset):
+    def __init__(self):
+        self.x = list(range(10))
+
+    def __len__(self):
+        return len(self.x)
+
+    def __getitem__(self, index):
+        return self.x[index]
+
+
+torch.random.manual_seed(1234)
+test_dataloader = DataLoader(
+        test_dataset(),
+        batch_size=1,
+        shuffle=True,
+        pin_memory=True,
+        drop_last=True
+)  # sampler
+
+i = 0
+for data in test_dataloader:
+    print(data)
+    i = i + 1
+    if i == 3:
+        break
+
+i = 0
+for data in test_dataloader:
+    print(data)
+    i = i + 1
+    if i == 3:
+        break

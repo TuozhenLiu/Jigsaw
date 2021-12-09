@@ -16,4 +16,4 @@ python ../input/jigsawscript/main.py \
   --T_max 3000 \
   --log_interval 100 \
   --eval_interval 1000 \
-  --eval_iters 10
+  --eval_iters 100

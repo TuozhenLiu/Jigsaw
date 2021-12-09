@@ -45,7 +45,7 @@ def evaluate_step(args, model, dataloader, eval_iters=None):
     print(f"***Evaluation***  |  [iteration] {args.eval_iters}   |  [loss] {round(loss.item(), 8)}   |  [acc] {round(acc.item(), 5)}  |  [total elapsed] {int(time_elapsed // 3600)}h, {int((time_elapsed % 3600) // 60)}m, {int((time_elapsed % 3600) % 60)}s")
 
 
-def finetune_step(args, fold, epoch, model, optimizer, scheduler, train_dataloader, cv_valid_dataloader):
+def finetune_step(args, fold, epoch, model, optimizer, scheduler, train_dataloader, cv_valid_dataloader, valid_dataloader):
     start = time.time()
 
     n_consumption = 0
@@ -92,6 +92,8 @@ def finetune_step(args, fold, epoch, model, optimizer, scheduler, train_dataload
             if iteration % args.eval_interval == 0 or iteration == total_iteration:
                 print("*** CV evaluation***")
                 evaluate_step(args, model, cv_valid_dataloader)
+                print("*** 2021 evaluation***")
+                evaluate_step(args, model, valid_dataloader, eval_iters=10000)
 
 
 def finetune(args, model, optimizer, scheduler, fold, train_dataloader, cv_valid_dataloader, valid_dataloader):
@@ -105,10 +107,10 @@ def finetune(args, model, optimizer, scheduler, fold, train_dataloader, cv_valid
 
     for epoch in range(args.n_epochs):
         print(f"[epoch {epoch}]" + "-"*50)
-        finetune_step(args, fold, epoch, model, optimizer, scheduler, train_dataloader, cv_valid_dataloader)
+        finetune_step(args, fold, epoch, model, optimizer, scheduler, train_dataloader, cv_valid_dataloader, valid_dataloader)
 
-        print("*** 2021 evaluation***")
-        evaluate_step(args, model, valid_dataloader, eval_iters=10000)
+        # print("*** 2021 evaluation***")
+        # evaluate_step(args, model, valid_dataloader, eval_iters=10000)
 
         # val_epoch_loss = valid_one_epoch(model, valid_loader, device=CONFIG['device'],
         #                                  epoch=epoch)
