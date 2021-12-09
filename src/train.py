@@ -41,7 +41,7 @@ def evaluate_step(args, model, dataloader, eval_iters=None):
     acc = acc / iteration / args.valid_batch_size
 
     time_elapsed = time.time() - start
-    print(f"***Evaluation***  |  [iteration] {args.eval_iters}   |  [loss] {round(loss.item(), 5)}   |  [acc] {round(acc.item(), 5)}  |  [total elapsed] {int(time_elapsed // 3600)}h, {int((time_elapsed % 3600) // 60)}m, {int((time_elapsed % 3600) % 60)}s")
+    print(f"***Evaluation***  |  [iteration] {args.eval_iters}   |  [loss] {round(loss.item(), 8)}   |  [acc] {round(acc.item(), 5)}  |  [total elapsed] {int(time_elapsed // 3600)}h, {int((time_elapsed % 3600) // 60)}m, {int((time_elapsed % 3600) % 60)}s")
 
 
 def finetune_step(args, fold, epoch, model, optimizer, scheduler, train_dataloader, cv_valid_dataloader):
@@ -79,7 +79,7 @@ def finetune_step(args, fold, epoch, model, optimizer, scheduler, train_dataload
 
             if iteration % args.log_interval == 0 or iteration == total_iteration:
                 time_elapsed = time.time() - start
-                print(f"[iter] {iteration}/{total_iteration} | [consumption] {n_consumption} | [lr] {round(optimizer.param_groups[0]['lr'], 8)} | [loss] {round(running_loss[-1], 5)} | [elapsed] {int(time_elapsed // 3600)}h, {int((time_elapsed % 3600) // 60)}m, {int((time_elapsed % 3600) % 60)}s")
+                print(f"[iter] {iteration}/{total_iteration} | [consumption] {n_consumption} | [lr] {round(optimizer.param_groups[0]['lr'], 8)} | [loss] {round(running_loss[-1], 8)} | [elapsed] {int(time_elapsed // 3600)}h, {int((time_elapsed % 3600) // 60)}m, {int((time_elapsed % 3600) % 60)}s")
 
             if iteration % args.save_interval == 0 or iteration == total_iteration:
                 PATH = os.path.join(args.checkpoint_path, "fold-" + str(fold))
