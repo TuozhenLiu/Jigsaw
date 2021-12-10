@@ -23,6 +23,8 @@ def get_args():
                         type=str, required=False, help="")
     parser.add_argument("--valid_path", default='../input/jigsaw-toxic-severity-rating/validation_data.csv',
                         type=str, required=False, help="")
+    parser.add_argument("--eval_model", nargs='+', default='',
+                        type=str, required=False, help="")
     parser.add_argument("--model_path", default='../input/jigsaw-toxic-severity-rating/validation_data.csv',
                         type=str, required=False, help="")
     parser.add_argument("--checkpoint_path", default='../input/jigsaw-toxic-severity-rating/validation_data.csv',
