@@ -4,8 +4,6 @@
 # Date: 2021/12/8
 # Description:
 # ----------------------------------------------------------------------------------------------------------------------
-import time
-
 import torch.nn as nn
 from transformers import AutoModel
 
@@ -16,7 +14,7 @@ class JigsawModel(nn.Module):
         super(JigsawModel, self).__init__()
         self.model = AutoModel.from_pretrained(args.model_path)
         self.drop = nn.Dropout(p=args.dropout)
-        self.fc = nn.Linear(768, 1)
+        self.fc = nn.Linear(args.hidden_size, 1)
 
     def forward(self, ids, mask):
         out = self.model(input_ids=ids, attention_mask=mask,

@@ -59,6 +59,8 @@ def get_args():
                         type=float, required=False, help="MarginRankingLoss")
     parser.add_argument("--dropout", default=0.2,
                         type=float, required=False, help="")
+    parser.add_argument("--hidden_size", default=768,
+                        type=int, required=False, help="")
     parser.add_argument("--lr", default=1e-4,
                         type=float, required=False, help="")
     parser.add_argument("--T_max", default=3000,
