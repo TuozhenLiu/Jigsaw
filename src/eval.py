@@ -31,8 +31,13 @@ if __name__ == '__main__':
         print(f"Getting predictions for model {i}: [eval_model]")
         eval_loader = eval_dataloader_provider(args, eval_df, tokenizer)
 
-        model = JigsawModel(args, eval_model)
+        model = JigsawModel(args)
         model.to(args.device)
+        if torch.cuda.is_available():
+            model.load_state_dict(torch.load(eval_model))
+        else:
+            model.load_state_dict(torch.load(eval_model, map_location=torch.device('cpu')))
+
         model.eval()
 
         single_preds = []

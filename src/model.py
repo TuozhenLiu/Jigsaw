@@ -11,10 +11,10 @@ from transformers import AutoModel
 
 
 class JigsawModel(nn.Module):
-    def __init__(self, args, model_path):
+    def __init__(self, args):
         # set the class attributes
         super(JigsawModel, self).__init__()
-        self.model = AutoModel.from_pretrained(model_path)
+        self.model = AutoModel.from_pretrained(args.model_path)
         self.drop = nn.Dropout(p=args.dropout)
         self.fc = nn.Linear(768, 1)
 
