@@ -1,4 +1,9 @@
-# Jigsaw
+# Jigsaw Rate Severity of Toxic Comments
+
+https://www.kaggle.com/c/jigsaw-toxic-severity-rating/submissions
+
+Private Leaderboard: 0.80831(23/2302)
+![./fig.png]()
 
 ## RoBERTa fine-tuning V0
 
